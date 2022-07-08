@@ -1,7 +1,7 @@
 #ifndef SRC_S21_STRING_H_
 #include<stdio.h>
 #include<stdlib.h>
-#include <stdarg.h>
+#include<stdarg.h>
 #include"s21_sprintf.h"
 #define SRC_S21_STRING_H_
 #define s21_NULL ((void *)0)

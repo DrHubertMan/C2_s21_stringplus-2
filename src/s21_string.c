@@ -239,7 +239,7 @@ s21_size_t s21_strspn(const char *str1, const char *str2) {
     return result;
 }
 
-// 19 half WORK YA NE EBU POCH
+// 19 
 char *s21_strstr(const char *haystack, const char *needle) {
     if (*needle == '\0') {
         return ((char*)haystack);
@@ -337,6 +337,10 @@ void *s21_insert(const char *src, const char *str, s21_size_t start_index) {
 
 // 24
 void *s21_trim(const char *src, const char *trim_chars) {
+    if ((!*src || !src) || (!*trim_chars || !trim_chars)) {
+        char *lol = (char*) calloc(1, sizeof(char)); 
+        return lol;
+    }
     s21_size_t src_length = s21_strlen(src);
     char* result = s21_NULL;
     s21_size_t spn = s21_strspn(src, trim_chars);
