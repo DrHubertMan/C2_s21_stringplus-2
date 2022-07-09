@@ -337,12 +337,21 @@ void *s21_insert(const char *src, const char *str, s21_size_t start_index) {
 
 // 24
 void *s21_trim(const char *src, const char *trim_chars) {
-    if ((!*src || !src) || (!*trim_chars || !trim_chars)) {
-        char *lol = (char*) calloc(1, sizeof(char)); 
-        return lol;
-    }
-    s21_size_t src_length = s21_strlen(src);
     char* result = s21_NULL;
+    if (!*src || !src) {
+        result = (char*) calloc (1, sizeof(char));
+    } else if (!trim_chars || !*trim_chars) {
+        char tmp[] = " ";
+        result = s21_cut(src, (const char*)tmp);
+    } else {
+        result = s21_cut(src, trim_chars);
+    }
+    return result;
+}
+
+void *s21_cut(const char *src, const char *trim_chars) {
+    char* result = s21_NULL;
+    s21_size_t src_length = s21_strlen(src);
     s21_size_t spn = s21_strspn(src, trim_chars);
     s21_size_t spn_from_end = s21_from_end_strspn(src, trim_chars);
     if ( spn == src_length ) {

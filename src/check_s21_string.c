@@ -1214,10 +1214,10 @@ free(res_s21);
 }
 
 START_TEST(trim_8) {
-char src[] = "qqq    v   ";
+char src[] = "qqq   v   ";
 char *trim_chars = s21_NULL;
 char *res_s21 = s21_trim(src,  trim_chars);
-char res_org[] = "qqq    v";
+char res_org[] = "qqq   v";
 ck_assert_pstr_eq(res_s21,  res_org);
 free(res_s21);
 }
