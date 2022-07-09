@@ -396,7 +396,7 @@ char* spec_f(struct format f, va_list* args) {
 
     int sign;
     double n = va_arg(*args, double);
-    
+
     if (n < 0) {
         sign = -1;
     } else {
@@ -415,7 +415,7 @@ char* spec_f(struct format f, va_list* args) {
         s21_strcat(integer_str, "nan");
         f.plus = 0;
         f.precision = 0;
-    }else if (__builtin_isinf(n) != 0) {
+    } else if (__builtin_isinf(n) != 0) {
         integer_str = calloc(4, sizeof(char));
         s21_strcat(integer_str, "inf");
         f.precision = 0;

@@ -2,12 +2,12 @@
 #include"s21_strerror.h"
 
 // 1
-void *s21_memchr(const void *str, int f, s21_size_t n) {
+void *s21_memchr(const void *str, int c, s21_size_t n) {
     const unsigned char *buf = str;
     s21_size_t i;
     for ( i = 0; i < n; i++ ) {
-        if ( buf[i] == f ) {
-            return (void*) buf + i;
+        if ( buf[i] == c ) {
+            return (char*) buf + i;
         }
     }
     return s21_NULL;
@@ -41,17 +41,19 @@ void *s21_memcpy(void* dest, const void* str1, s21_size_t n) {
 }
 
 // 4
-void *s21_memmove(void *dest, void *str1, s21_size_t n) {
-    void *d = dest;
-    if (dest <= str1 || (char*)dest >= ((char*)str1 + n)) {
+void *s21_memmove(void *dest, const void *str1, s21_size_t n) {
+    char* dest_m = dest;
+    const char* str1_m = str1;
+    void *d = dest_m;
+    if (dest_m <= str1_m || dest_m >= (str1_m + n)) {
         while (n--) {
-            *(char*)dest++ = *(char*)str1++;
+            *dest_m++ = *str1_m++;
         }
   } else {
-        dest = (char*)dest + n - 1;
-        str1 = (char*)str1 + n - 1;
+        dest_m = dest_m + n - 1;
+        str1_m = str1_m + n - 1;
         while (n--) {
-            *(char*)dest-- = *(char*)str1--;
+            *dest_m-- = *str1_m--;
         }
     }
     return d;
@@ -206,6 +208,7 @@ char *s21_strpbrk(const char *str1, const char *str2) {
             }
         buf1++;
     }
+    *(char*)buf2 = '\0';
     return back;
 }
 
@@ -239,7 +242,7 @@ s21_size_t s21_strspn(const char *str1, const char *str2) {
     return result;
 }
 
-// 19 
+// 19
 char *s21_strstr(const char *haystack, const char *needle) {
     if (*needle == '\0') {
         return ((char*)haystack);
@@ -338,7 +341,7 @@ void *s21_insert(const char *src, const char *str, s21_size_t start_index) {
 // 24
 void *s21_trim(const char *src, const char *trim_chars) {
     char* result = s21_NULL;
-    if (!*src || !src) {
+    if (!src) {
         result = (char*) calloc (1, sizeof(char));
     } else if (!trim_chars || !*trim_chars) {
         char tmp[] = " ";
