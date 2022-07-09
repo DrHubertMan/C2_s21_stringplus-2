@@ -126,6 +126,8 @@ int extract_spec(const char* format, struct format *f) {
             f->spec = s_spec;
             break;
         case 'u':
+            f->plus = 0;
+            f->space = 0;
             f->spec = u_spec;
             break;
         case '%':
@@ -257,7 +259,6 @@ char* s21_itoa(long int c) {
 
 char* spec_u(struct format f, va_list* args) {
     unsigned long int n;
-
     if (f.length == h_len) {
         n = (unsigned short) va_arg(*args, unsigned int);
     } else if (f.length == l_len) {
@@ -395,7 +396,7 @@ char* spec_f(struct format f, va_list* args) {
 
     int sign;
     double n = va_arg(*args, double);
-
+    
     if (n < 0) {
         sign = -1;
     } else {
@@ -407,7 +408,21 @@ char* spec_f(struct format f, va_list* args) {
     long integer = (long) n;
     double remain = n - integer;
 
-    char* integer_str = s21_itoa(integer);
+    char* integer_str;
+
+    if (__builtin_isnan(n) == 1) {
+        integer_str = calloc(4, sizeof(char));
+        s21_strcat(integer_str, "nan");
+        f.plus = 0;
+        f.precision = 0;
+    }else if (__builtin_isinf(n) != 0) {
+        integer_str = calloc(4, sizeof(char));
+        s21_strcat(integer_str, "inf");
+        f.precision = 0;
+    } else {
+        integer_str = s21_itoa(integer);
+    }
+
     s21_size_t integer_len = s21_strlen(integer_str);
 
     char* remain_str = calloc(f.precision + 1, sizeof(char));
@@ -422,7 +437,6 @@ char* spec_f(struct format f, va_list* args) {
     }
 
     char* result = calloc(integer_len + f.precision + 3, sizeof(char));
-
 
     if ( sign == -1 ) {
         result[0] = '-';

@@ -11,7 +11,7 @@ gcov_report: test
 	genhtml -o report test.info  --rc lcov_branch_coverage=1
 
 test:check_s21_string.o  s21_string_test.a 
-	$(CC) --coverage -o test_coverage.out check_s21_string.o -lcheck -L. s21_string_test.a -fsanitize=address
+	$(CC) --coverage -o test_coverage.out check_s21_string.o -lcheck -L. s21_string_test.a 
 	./test_coverage.out
 
 s21_string_test.a: s21_string_test.o s21_sprintf_test.o
@@ -19,13 +19,13 @@ s21_string_test.a: s21_string_test.o s21_sprintf_test.o
 	ranlib s21_string_test.a
 
 s21_string_test.o:
-	$(CC) $(CFLAGSCOV) -o s21_string_test.o s21_string.c -fsanitize=address
+	$(CC) $(CFLAGSCOV) -o s21_string_test.o s21_string.c 
 
 s21_sprintf_test.o:
-	$(CC) $(CFLAGSCOV) -o s21_sprintf_test.o s21_sprintf.c -fsanitize=address
+	$(CC) $(CFLAGSCOV) -o s21_sprintf_test.o s21_sprintf.c 
 
 check_s21_string.o:
-	$(CC) $(CFLAGS) check_s21_string.c -fsanitize=address
+	$(CC) $(CFLAGS) check_s21_string.c 
 
 test_ff: s21_string.a check_s21_string.o
 	$(CC) -o test.out check_s21_string.o -L. s21_string.a -lcheck -lm -lpthread
