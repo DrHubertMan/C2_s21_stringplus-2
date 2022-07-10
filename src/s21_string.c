@@ -3,14 +3,19 @@
 
 // 1
 void *s21_memchr(const void *str, int c, s21_size_t n) {
-    const unsigned char *buf = str;
-    s21_size_t i;
-    for ( i = 0; i < n; i++ ) {
-        if ( buf[i] == c ) {
-            return (char*) buf + i;
+    s21_size_t i = 0;
+    unsigned char *ret = (unsigned char *)str;
+
+        unsigned char* p = s21_NULL;
+        while (i < n) {
+            if (*((unsigned char *)ret + i) == (unsigned char)c) {
+                p = (unsigned char *)ret + i;
+                break;
+            }
+            i++;
         }
-    }
-    return s21_NULL;
+
+        return (void *)p;
 }
 
 // 2

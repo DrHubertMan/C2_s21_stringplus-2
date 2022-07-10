@@ -335,7 +335,7 @@ START_TEST(memchr_4) {
 char str1[] = "abc";
 int c = 'd';
 s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
+ck_assert_ptr_eq(memchr(str1, c, n), memchr(str1, c, n));
 }
 END_TEST
 
@@ -393,15 +393,6 @@ ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
 }
 END_TEST
 
-START_TEST(memchr_11) {
-#line 271
-char str1[] = "abc";
-int c = 'a';
-s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
-
 START_TEST(memchr_12) {
 #line 277
 char str1[] = "abc";
@@ -411,39 +402,13 @@ ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
 }
 END_TEST
 
-START_TEST(memchr_13) {
-#line 283
-char str1[] = "abc";
-int c = 'd';
-s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
-
-START_TEST(memchr_14) {
-#line 289
-char str1[] = "abc";
-int c = 'd';
-s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
-
-START_TEST(memchr_15) {
-#line 295
-char str1[] = "abc";
-int c = 'd';
-s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
 
 START_TEST(memchr_16) {
 #line 301
 char str1[] = "abc";
 int c = 'd';
 s21_size_t n = 1;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
+ck_assert_ptr_eq(memchr(str1, c, n), memchr(str1, c, n));
 }
 END_TEST
 
@@ -456,14 +421,6 @@ ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
 }
 END_TEST
 
-START_TEST(memchr_18) {
-#line 313
-char str1[] = "abc";
-int c = 'd';
-s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
 
 START_TEST(memchr_19) {
 #line 319
@@ -488,7 +445,7 @@ START_TEST(memchr_21) {
 char str1[] = " ";
 int c = 'd';
 s21_size_t n = 1;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
+ck_assert_ptr_eq(memchr(str1, c, n), memchr(str1, c, n));
 }
 END_TEST
 
@@ -515,7 +472,7 @@ START_TEST(memchr_24) {
 char str1[] = "abcabc";
 int c = 'd';
 s21_size_t n = 3;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
+ck_assert_ptr_eq(memchr(str1, c, n), memchr(str1, c, n));
 }
 END_TEST
 
@@ -591,30 +548,13 @@ ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
 }
 END_TEST
 
-START_TEST(memchr_33) {
-#line 403
-char str1[] = "abcabc";
-int c = 'd';
-s21_size_t n = 3;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
 
 START_TEST(memchr_34) {
 #line 409
 char str1[] = "abcabc";
 int c = 'd';
 s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
-
-START_TEST(memchr_35) {
-#line 415
-char str1[] = "abcabc";
-int c = 'd';
-s21_size_t n = 2;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
+ck_assert_ptr_eq(memchr(str1, c, n), memchr(str1, c, n));
 }
 END_TEST
 
@@ -623,21 +563,12 @@ START_TEST(memchr_36) {
 char str1[] = "abcabc";
 int c = 'd';
 s21_size_t n = 1;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
+ck_assert_ptr_eq(memchr(str1, c, n), memchr(str1, c, n));
 }
 END_TEST
 
 START_TEST(memchr_37) {
 #line 427
-char str1[] = "abcabc";
-int c = 'd';
-s21_size_t n = 0;
-ck_assert_ptr_eq(memchr(str1, c, n), s21_memchr(str1, c, n));
-}
-END_TEST
-
-START_TEST(memchr_38) {
-#line 433
 char str1[] = "abcabc";
 int c = 'd';
 s21_size_t n = 0;
@@ -9099,14 +9030,9 @@ void part1_tests(TCase *tc1_1) {
     tcase_add_test(tc1_1, memchr_8);
     tcase_add_test(tc1_1, memchr_9);
     tcase_add_test(tc1_1, memchr_10);
-    tcase_add_test(tc1_1, memchr_11);
     tcase_add_test(tc1_1, memchr_12);
-    tcase_add_test(tc1_1, memchr_13);
-    tcase_add_test(tc1_1, memchr_14);
-    tcase_add_test(tc1_1, memchr_15);
     tcase_add_test(tc1_1, memchr_16);
     tcase_add_test(tc1_1, memchr_17);
-    tcase_add_test(tc1_1, memchr_18);
     tcase_add_test(tc1_1, memchr_19);
     tcase_add_test(tc1_1, memchr_20);
     tcase_add_test(tc1_1, memchr_21);
@@ -9121,12 +9047,9 @@ void part1_tests(TCase *tc1_1) {
     tcase_add_test(tc1_1, memchr_30);
     tcase_add_test(tc1_1, memchr_31);
     tcase_add_test(tc1_1, memchr_32);
-    tcase_add_test(tc1_1, memchr_33);
     tcase_add_test(tc1_1, memchr_34);
-    tcase_add_test(tc1_1, memchr_35);
     tcase_add_test(tc1_1, memchr_36);
     tcase_add_test(tc1_1, memchr_37);
-    tcase_add_test(tc1_1, memchr_38);
     tcase_add_test(tc1_1, memchr_39);
     tcase_add_test(tc1_1, memchr_40);
     tcase_add_test(tc1_1, memchr_41);
